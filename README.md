@@ -29,6 +29,9 @@ O sistema fará um scan da credencial do participante para permitir a entrada no
 
 - [ ]  O check-in no evento será realizado através de um QRCode;
 
+### Diagrama ERD
+![Diagrama ERD](https://github.com/ILeonnard/Pass-In/assets/148548795/4feb90c6-eb48-4b1f-acd8-8451c61db24a)
+
 ## Banco de dados
 
 Nessa aplicação foi utilizado banco de dados relacional (SQL). Para ambiente de desenvolvimento segui com o HyperSQL pela facilidade do ambiente.
