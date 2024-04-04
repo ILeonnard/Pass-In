@@ -1,5 +1,7 @@
 package br.com.ileonnard.passin.controllers;
 
+import br.com.ileonnard.passin.dto.attendee.AttendeeIdDTO;
+import br.com.ileonnard.passin.dto.attendee.AttendeeRequestDTO;
 import br.com.ileonnard.passin.dto.attendee.AttendeesListResponseDTO;
 import br.com.ileonnard.passin.dto.event.EventIdDTO;
 import br.com.ileonnard.passin.dto.event.EventRequestDTO;
@@ -32,9 +34,19 @@ public class EventController {
 
         var uri = uriComponentsBuilder.path("/events/{id}").buildAndExpand(eventIdDTO.eventId()).toUri();
 
-
         return ResponseEntity.created(uri).body(eventIdDTO);
     }
+
+
+    @PostMapping("/{eventId}/attendees")
+    public ResponseEntity<AttendeeIdDTO> registerParticipant(@PathVariable String eventId, @RequestBody AttendeeRequestDTO body, UriComponentsBuilder uriComponentsBuilder){
+        AttendeeIdDTO attendeeIdDTO = this.eventService.registerAttendeeOnEvent(eventId, body);
+
+        var uri = uriComponentsBuilder.path("/attendees/{attendId}/badge").buildAndExpand(attendeeIdDTO.attendeeId()).toUri();
+
+        return ResponseEntity.created(uri).body(attendeeIdDTO);
+    }
+
 
     @GetMapping("/attendees/{id}")
     public ResponseEntity<AttendeesListResponseDTO> getEventAttendees(@PathVariable String id) {
